@@ -3,4 +3,6 @@
     <string name="salaryviewer_1_0_under_construction">SalaryViewer 1.0 UNDER CONSTRUCTION</string>
     <string name="expense">Expense...</string>
     <string name="ok">OK</string>
+    <string name="remove">Remove</string>
+    <string name="cost">cost</string>
 </resources>
