@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<String> listItems = new ArrayList<String>();
+    ArrayList<String> listItems = new ArrayList<>();
     ListView listView;
     EditText expenseText;
     EditText expenseCost;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         if(listItems.size() >= 1){
             listItems.remove(listItems.size()-1);
             adapter.notifyDataSetChanged();
-            Toast.makeText(this, "item removed", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Item removed", Toast.LENGTH_LONG).show();
             expenseText.setText("");
             expenseCost.setText("");
         }else{
