@@ -64,12 +64,26 @@
             <ListView
                 android:id="@+id/list"
                 android:layout_width="match_parent"
-                android:layout_height="533dp" />
+                android:layout_height="533dp" >
+
+            </ListView>
+            <com.anychart.AnyChartView
+                android:id="@+id/any_chart_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/objectCounterID"
+                android:layout_width="106dp"
+                android:layout_height="wrap_content"
+                android:text="@string/objects" />
+        </TableRow>
     </TableLayout>
 
 </LinearLayout>

@@ -6,12 +6,21 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomAdapter extends ArrayAdapter<Expenses> {
 
+    private Context context;
+    private ArrayList<Expenses> objects;
+
     public CustomAdapter(Context context, List<Expenses> objects) {
         super(context, -1, objects);
+    }
+
+    public void remove(int position) {
+        objects.remove(position);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -19,7 +28,7 @@ public class CustomAdapter extends ArrayAdapter<Expenses> {
         ViewHolder viewHolder;
         View view = convertView;
         if (view == null) {
-            view = View.inflate(getContext(), R.layout.list, null);
+            view = View.inflate(getContext(), R.layout.list_item, null);
             viewHolder = new ViewHolder();
             viewHolder.setView(view);
         } else {
@@ -41,6 +50,5 @@ public class CustomAdapter extends ArrayAdapter<Expenses> {
             expenseCount = (TextView) view.findViewById(R.id.infoTextViewID);
             view.setTag(this);
         }
-
     }
 }
