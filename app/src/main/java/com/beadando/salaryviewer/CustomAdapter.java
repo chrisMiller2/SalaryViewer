@@ -36,7 +36,7 @@ public class CustomAdapter extends ArrayAdapter<Expenses> {
         }
 
         viewHolder.expenseName.setText(getItem(position).getExpenseName());
-        viewHolder.expenseCount.setText(getItem(position).getExpenseCount());
+        viewHolder.expenseCount.setText(String.valueOf(getItem(position).getExpenseCount()));
         return view;
     }
 

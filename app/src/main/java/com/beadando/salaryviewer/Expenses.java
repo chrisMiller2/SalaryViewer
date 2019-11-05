@@ -5,9 +5,9 @@ import android.os.Parcelable;
 
 public class Expenses implements Parcelable {
     public String expenseName;
-    public String expenseCount;
+    public int expenseCount;
 
-    public Expenses(String expenseName, String expenseCount) {
+    public Expenses(String expenseName, int expenseCount) {
         this.expenseName = expenseName;
         this.expenseCount = expenseCount;
     }
@@ -24,11 +24,11 @@ public class Expenses implements Parcelable {
         this.expenseName = expenseName;
     }
 
-    public String getExpenseCount() {
+    public int getExpenseCount() {
         return expenseCount;
     }
 
-    public void setExpenseCount(String expenseCount) {
+    public void setExpenseCount(int expenseCount) {
         this.expenseCount = expenseCount;
     }
 
@@ -40,12 +40,12 @@ public class Expenses implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(expenseName);
-        dest.writeString(expenseCount);
+        dest.writeInt(expenseCount);
     }
 
     private void readFromParcel(Parcel parcel) {
         expenseName = parcel.readString();
-        expenseCount = parcel.readString();
+        expenseCount = parcel.readInt();
     }
 
     public static final Parcelable.Creator<Expenses> CREATOR = new Parcelable.Creator<Expenses>() {

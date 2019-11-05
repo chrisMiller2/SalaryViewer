@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     Expenses expenseObject;
     String name;
-    String cost;
+    int cost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         Pie pie = AnyChart.pie();
         List<DataEntry> data = new ArrayList<>();
 
-        data.add(new ValueDataEntry("Herold", 20));
+        data.add(new ValueDataEntry("Heroldg", 20));
         data.add(new ValueDataEntry("Jake", 12));
         data.add(new ValueDataEntry("Peter", 10));
 
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     public void updateList(View view) {
         if (!expenseNameText.getText().toString().equals("") && !expenseCostText.getText().toString().equals("")) {
             name = expenseNameText.getText().toString();
-            cost = expenseCostText.getText().toString();
+            cost = Integer.parseInt(String.valueOf(expenseCostText.getText()));
 
             expenseObject = new Expenses(name, cost);
             expenseList.add(expenseObject);
