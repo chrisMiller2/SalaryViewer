@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,10 +26,16 @@ public class MainActivity extends AppCompatActivity {
 
     EditText expenseNameText;
     EditText expenseCostText;
+    TextView sumText;
+    AnyChartView anyChartView;
+    Pie pie;
+
+    List<DataEntry> data;
 
     Expenses expenseObject;
     String name;
     int cost;
+    int sum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         expenseNameText = findViewById(R.id.inputExpenseID);
         expenseCostText = findViewById(R.id.inputCostID);
+        sumText = findViewById(R.id.sumID);
+
 
         expenseList = new ArrayList<>();
 
@@ -45,17 +54,13 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         //CHART
-        Pie pie = AnyChart.pie();
-        List<DataEntry> data = new ArrayList<>();
-
-        data.add(new ValueDataEntry("Heroldg", 20));
-        data.add(new ValueDataEntry("Jake", 12));
-        data.add(new ValueDataEntry("Peter", 10));
-
-        pie.data(data);
-
-        AnyChartView anyChartView = (AnyChartView) findViewById(R.id.any_chart_view);
-        anyChartView.setChart(pie);
+//        pie = AnyChart.pie();
+//        data = new ArrayList<>();
+//
+//        pie.data(data);
+//
+//        anyChartView = (AnyChartView) findViewById(R.id.any_chart_view);
+//        anyChartView.setChart(pie);
 
         //SWIPE SIDEWAYS TO REMOVE LIST ELEMENT
         /*final SwipeToDismissTouchListener<ListViewAdapter> touchListener =
@@ -92,10 +97,16 @@ public class MainActivity extends AppCompatActivity {
             name = expenseNameText.getText().toString();
             cost = Integer.parseInt(String.valueOf(expenseCostText.getText()));
 
+            sum += cost;
+            sumText.setText(String.valueOf(sum));
+
             expenseObject = new Expenses(name, cost);
             expenseList.add(expenseObject);
 
             adapter.notifyDataSetChanged();
+//            data.add(new ValueDataEntry(name, cost));
+//            pie.data(data);
+//            anyChartView.refreshDrawableState();
             Toast.makeText(this, "item added", Toast.LENGTH_LONG).show();
 
             expenseNameText.setText("");
@@ -107,10 +118,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void removeFromList(View view) {
         if (expenseList.size() >= 1) {
+            sum -= expenseList.get(expenseList.size()-1).getExpenseCount();
 
             expenseList.remove(expenseList.size() - 1);
 
+            sumText.setText(String.valueOf(sum));
+
             adapter.notifyDataSetChanged();
+//            data.remove(expenseList.size()-1);
+//            pie.data(data);
             Toast.makeText(this, "Item removed", Toast.LENGTH_LONG).show();
 
             expenseNameText.setText("");

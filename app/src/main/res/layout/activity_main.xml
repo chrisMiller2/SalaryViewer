@@ -34,6 +34,7 @@
                 android:onClick="updateList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/ok" />
 
             <Button
@@ -41,6 +42,7 @@
                 android:onClick="removeFromList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/remove" />
         </TableRow>
 
@@ -55,6 +57,12 @@
                 android:ems="10"
                 android:inputType="number"
                 android:hint="@string/cost" />
+
+            <TextView
+                android:id="@+id/sumID"
+                android:layout_width="106dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/sum" />
         </TableRow>
 
         <TableRow
@@ -67,22 +75,18 @@
                 android:layout_height="533dp" >
 
             </ListView>
+
             <com.anychart.AnyChartView
                 android:id="@+id/any_chart_view"
-                android:layout_width="match_parent"
+                android:layout_width="74dp"
                 android:layout_height="match_parent"
-                />
+                android:layout_weight="2"/>
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <TextView
-                android:id="@+id/objectCounterID"
-                android:layout_width="106dp"
-                android:layout_height="wrap_content"
-                android:text="@string/objects" />
         </TableRow>
     </TableLayout>
 
