@@ -7,4 +7,6 @@
     <string name="cost">cost</string>
     <string name="objects">objects:</string>
     <string name="sum">sum</string>
+    <string name="charts">Charts</string>
+    <string name="chart">Chart</string>
 </resources>

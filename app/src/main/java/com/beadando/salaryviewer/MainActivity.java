@@ -1,6 +1,8 @@
 package com.beadando.salaryviewer;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -27,9 +29,9 @@ public class MainActivity extends AppCompatActivity {
     EditText expenseNameText;
     EditText expenseCostText;
     TextView sumText;
+
     AnyChartView anyChartView;
     Pie pie;
-
     List<DataEntry> data;
 
     Expenses expenseObject;
@@ -52,15 +54,6 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list);
         adapter = new CustomAdapter(this, expenseList);
         listView.setAdapter(adapter);
-
-        //CHART
-//        pie = AnyChart.pie();
-//        data = new ArrayList<>();
-//
-//        pie.data(data);
-//
-//        anyChartView = (AnyChartView) findViewById(R.id.any_chart_view);
-//        anyChartView.setChart(pie);
 
         //SWIPE SIDEWAYS TO REMOVE LIST ELEMENT
         /*final SwipeToDismissTouchListener<ListViewAdapter> touchListener =
@@ -97,12 +90,15 @@ public class MainActivity extends AppCompatActivity {
             name = expenseNameText.getText().toString();
             cost = Integer.parseInt(String.valueOf(expenseCostText.getText()));
 
+            //summing costs
             sum += cost;
             sumText.setText(String.valueOf(sum));
 
+            //adding items to the list
             expenseObject = new Expenses(name, cost);
             expenseList.add(expenseObject);
 
+            //apply changes
             adapter.notifyDataSetChanged();
 //            data.add(new ValueDataEntry(name, cost));
 //            pie.data(data);
@@ -112,18 +108,21 @@ public class MainActivity extends AppCompatActivity {
             expenseNameText.setText("");
             expenseCostText.setText("");
         } else {
-            Toast.makeText(this, "Can't list_item nothing", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Can't add nothing to the list", Toast.LENGTH_LONG).show();
         }
     }
 
     public void removeFromList(View view) {
         if (expenseList.size() >= 1) {
-            sum -= expenseList.get(expenseList.size()-1).getExpenseCount();
 
+            //decrease sum
+            sum -= expenseList.get(expenseList.size() - 1).getExpenseCount();
+
+            //remove last list item
             expenseList.remove(expenseList.size() - 1);
 
+            //apply changes
             sumText.setText(String.valueOf(sum));
-
             adapter.notifyDataSetChanged();
 //            data.remove(expenseList.size()-1);
 //            pie.data(data);
@@ -134,5 +133,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Nothing left to remove", Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void openCharts(View view) {
+        Intent i = new Intent(this, Charts.class);
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("list", expenseList);
+        i.putExtras(bundle);
+        startActivity(i);
     }
 }

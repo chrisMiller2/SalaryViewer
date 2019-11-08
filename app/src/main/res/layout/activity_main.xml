@@ -63,6 +63,7 @@
                 android:layout_width="106dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/sum" />
+
         </TableRow>
 
         <TableRow
@@ -72,15 +73,17 @@
             <ListView
                 android:id="@+id/list"
                 android:layout_width="match_parent"
-                android:layout_height="533dp" >
+                android:layout_height="533dp">
 
             </ListView>
 
-            <com.anychart.AnyChartView
-                android:id="@+id/any_chart_view"
-                android:layout_width="74dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"/>
+            <Button
+                android:id="@+id/chartID"
+                android:onClick="openCharts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/charts" />
+
         </TableRow>
 
         <TableRow
