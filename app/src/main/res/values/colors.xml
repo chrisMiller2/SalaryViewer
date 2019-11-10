@@ -11,5 +11,6 @@
     <color name="primary_light">#B3E5FC</color>
     <color name="accent">#448AFF</color>
 
+    <color name="gray_background">#757575</color>
     <color name="yellow">#FFBB33</color>
 </resources>

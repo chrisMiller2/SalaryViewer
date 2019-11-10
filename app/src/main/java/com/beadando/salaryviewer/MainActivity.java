@@ -1,24 +1,23 @@
 package com.beadando.salaryviewer;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Pie;
+import com.hudomju.swipe.SwipeToDismissTouchListener;
+import com.hudomju.swipe.adapter.ListViewAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,11 +29,8 @@ public class MainActivity extends AppCompatActivity {
     EditText expenseCostText;
     TextView sumText;
 
-    AnyChartView anyChartView;
-    Pie pie;
-    List<DataEntry> data;
-
     Expenses expenseObject;
+
     String name;
     int cost;
     int sum = 0;
@@ -48,15 +44,13 @@ public class MainActivity extends AppCompatActivity {
         expenseCostText = findViewById(R.id.inputCostID);
         sumText = findViewById(R.id.sumID);
 
-
         expenseList = new ArrayList<>();
-
         listView = (ListView) findViewById(R.id.list);
         adapter = new CustomAdapter(this, expenseList);
         listView.setAdapter(adapter);
 
         //SWIPE SIDEWAYS TO REMOVE LIST ELEMENT
-        /*final SwipeToDismissTouchListener<ListViewAdapter> touchListener =
+        final SwipeToDismissTouchListener<ListViewAdapter> touchListener =
                 new SwipeToDismissTouchListener<>(
                         new ListViewAdapter(listView),
                         new SwipeToDismissTouchListener.DismissCallbacks<ListViewAdapter>() {
@@ -67,7 +61,19 @@ public class MainActivity extends AppCompatActivity {
 
                             @Override
                             public void onDismiss(ListViewAdapter view, int position) {
-                                adapter.remove(position);
+                                    //decrease sum
+                                    sum -= expenseList.get(expenseList.size() - 1).getExpenseCount();
+
+                                    //remove last list item
+                                    expenseList.remove(expenseList.size() - 1);
+
+                                    //apply changes
+                                    sumText.setText(String.valueOf(sum));
+                                    adapter.notifyDataSetChanged();
+                                    Toast.makeText(MainActivity.this, "Item removed", Toast.LENGTH_LONG).show();
+
+                                    expenseNameText.setText("");
+                                    expenseCostText.setText("");
                             }
                         });
 
@@ -79,11 +85,12 @@ public class MainActivity extends AppCompatActivity {
                 if (touchListener.existPendingDismisses()) {
                     touchListener.undoPendingDismiss();
                 } else {
-                    Toast.makeText(MainActivity.this, "Position " + position, LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Position " + position, Toast.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
     }
+
 
     public void updateList(View view) {
         if (!expenseNameText.getText().toString().equals("") && !expenseCostText.getText().toString().equals("")) {
@@ -100,38 +107,12 @@ public class MainActivity extends AppCompatActivity {
 
             //apply changes
             adapter.notifyDataSetChanged();
-//            data.add(new ValueDataEntry(name, cost));
-//            pie.data(data);
-//            anyChartView.refreshDrawableState();
             Toast.makeText(this, "item added", Toast.LENGTH_LONG).show();
 
             expenseNameText.setText("");
             expenseCostText.setText("");
         } else {
             Toast.makeText(this, "Can't add nothing to the list", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    public void removeFromList(View view) {
-        if (expenseList.size() >= 1) {
-
-            //decrease sum
-            sum -= expenseList.get(expenseList.size() - 1).getExpenseCount();
-
-            //remove last list item
-            expenseList.remove(expenseList.size() - 1);
-
-            //apply changes
-            sumText.setText(String.valueOf(sum));
-            adapter.notifyDataSetChanged();
-//            data.remove(expenseList.size()-1);
-//            pie.data(data);
-            Toast.makeText(this, "Item removed", Toast.LENGTH_LONG).show();
-
-            expenseNameText.setText("");
-            expenseCostText.setText("");
-        } else {
-            Toast.makeText(this, "Nothing left to remove", Toast.LENGTH_LONG).show();
         }
     }
 

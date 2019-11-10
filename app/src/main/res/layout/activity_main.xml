@@ -38,12 +38,12 @@
                 android:text="@string/ok" />
 
             <Button
-                android:id="@+id/removeExpenseID"
-                android:onClick="removeFromList"
+                android:id="@+id/chartID"
+                android:onClick="openCharts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/remove" />
+                android:text="@string/charts" />
         </TableRow>
 
         <TableRow
@@ -59,9 +59,17 @@
                 android:hint="@string/cost" />
 
             <TextView
+                android:id="@+id/textView"
+                android:layout_width="76dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/summary" />
+
+            <TextView
                 android:id="@+id/sumID"
                 android:layout_width="106dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:hint="@string/sum" />
 
         </TableRow>
@@ -76,13 +84,6 @@
                 android:layout_height="533dp">
 
             </ListView>
-
-            <Button
-                android:id="@+id/chartID"
-                android:onClick="openCharts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/charts" />
 
         </TableRow>
 

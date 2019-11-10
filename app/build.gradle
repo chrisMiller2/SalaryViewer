@@ -27,9 +27,10 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
-    //swipe to delete
+    //swipe
     implementation 'com.hudomju:swipe-to-dismiss-undo:1.0'
 
     //charts
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
