@@ -62,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDismiss(ListViewAdapter view, int position) {
                                     //decrease sum
-                                    sum -= expenseList.get(expenseList.size() - 1).getExpenseCount();
+                                    sum -= expenseList.get(position).getExpenseCount();
 
                                     //remove last list item
-                                    expenseList.remove(expenseList.size() - 1);
+                                    expenseList.remove(position);
 
                                     //apply changes
                                     sumText.setText(String.valueOf(sum));
