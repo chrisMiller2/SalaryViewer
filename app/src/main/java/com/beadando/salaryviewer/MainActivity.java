@@ -2,6 +2,7 @@ package com.beadando.salaryviewer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
@@ -122,5 +123,10 @@ public class MainActivity extends AppCompatActivity {
         bundle.putParcelableArrayList("list", expenseList);
         i.putExtras(bundle);
         startActivity(i);
+    }
+    public void openPreferenceSettings(View view)
+    {
+        Intent intent = new Intent(this, Preferences.class);
+        startActivity(intent);
     }
 }
