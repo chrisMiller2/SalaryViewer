@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 /** Ezeket valahol tárolja, ha az appot újra rakom akkor is megtalálja, creepy...
+ * a sharedPrefs és a value teljesen random, bármi lehetne.
  */
 public class Preferences extends AppCompatActivity{
     public static  final String SHARED_PREFS = "sharedPrefs";
